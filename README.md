@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Attatched is my applicaiton for the coding Challenge.
+Got to the point where I was able to create tweets.
 
-Things you may want to cover:
+I have edited this page to inform you I would also like to apply for your customer service position.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Attatched is a pdf of My CV.
+Thank You!!
