@@ -1,0 +1,26 @@
+
+<div class="background">
+
+
+ <span>Tweets</span> </h2></div>
+
+
+<div class="container">
+  <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
+    <% @tweets.each do |tweet| %>
+    <div class="col-xs-12">
+      <div class="text-center">
+        <h2><%= tweet.title %></h2>
+        <h6><%= tweet.created_at.strftime('%b %d, %Y') %></h6>
+      
+      <div class="indexbody">
+        <p><%= raw(tweet.body).truncate(358) %></p>
+      </div>
+
+
+
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>
