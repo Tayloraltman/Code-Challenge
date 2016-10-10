@@ -1,16 +1,14 @@
 
 class User < ActiveRecord::Base
-	
-  before_create :set_auth_token
   has_many :tweets
+  before_create :set_auth_token
 
-  def create
-  	@user =  User.new
-  end
+
+
   private
   def set_auth_token
-    
-    @authentication = generate_auth_token
+    return if authentication.present?
+    self.authentication = generate_auth_token
   end
 
   def generate_auth_token

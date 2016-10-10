@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-	before_action :authenticate, except: [ :index ]
+	before_action :authenticate, except: [ :index, :show ]
 
 
   def index  
@@ -12,30 +12,56 @@ class TweetsController < ApplicationController
   end
   
   def create
-  	@tweet = Tweet.new(tweet_params)
-  	@tweet.save
-  		
+  	user = User.find_by(id: params[:user_id])
+    if tweet_params[:body].length <= 140
+     user.tweets.create!(tweet_params)
+      render json: user.tweets.last, status: 200
+    else
+      render json: {error: "Tweet must be less than 140 characters"}, status: 400
+    end
+  end
 
+
+    def show
+    tweet = Tweet.find_by(id: params[:id])
+    if tweet
+     	 render json: tweet, status: 200
+    else
+      render json: {error: "Cannot find tweet"}, status: 404
+    	end
   	end
+
+  	def destroy
+    	tweet = Tweet.find_by(id: params[:id])
+    	tweet.destroy
+    	render json: tweet
+  	end
+
+def show
+    @tweet = Tweet.find_by(id: params[:id])
+    if @tweet != nil
+      render json: @tweet, status: 200
+    else
+      render json: {error: "Cannot find tweet with the ID"}, status: 404
+    end
+end
 	
 	
 
-  protected
+
+
   def authenticate
     authenticate_or_request_with_http_token do |token, options|
-      User.find_by(auth_token: token)
+      User.find_by(authentication: token)
    end
   end
 
-
+private
   def tweet_params
-    params.require(:tweet).permit(:title, :body,)
-  end
-
-  def find_tweet
-    @tweet = Tweet.find(params[:id])
-
-
+    params.require(:tweet).permit(:title, :body, :authentication)
   end
 
 end
+  
+
+
